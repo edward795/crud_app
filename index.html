@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="css/style.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Google Sheets CRUD</title>
+  </head>
+  <body>
+<div class="container mt-3">
+  <h4>Welcome to CRUD App with Google Sheets and Appscript.</h4>
+<button class="btn btn-primary mt-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#dashboard" aria-controls="dashboard">
+
+<!-- Navigation Dashboard  -->
+Click to Open DashBoard
+</button>
+<div id="dashboard-bg">
+<div class="bg-image"></div>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="dashboard" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title mt-4" id="dashboardLabel">CRUD Operations DashBoard</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+     <p>Select the operations you want to perform on the Google Sheets Backend.</p>
+	 <p>It is advised to perform create operation first to load your profile into the database. </p>
+    </div>
+    <div class="dropdown mt-3">
+	<ul>
+      <li><button class="btn btn-primary ac" type="button" id="create" data-toggle="modal" data-target="#createModal" data-whatever="@mdo" data-bs-dismiss="offcanvas">
+        Create
+      </button></li><br>
+      <li><button class="btn btn-success ac" type="button" id="read" data-toggle="modal" data-target="#readModal" data-whatever="@mdo" data-bs-dismiss="offcanvas">
+        Read
+      </button></li><br>
+	  <li><button class="btn btn-secondary ac" type="button" id="update" data-toggle="modal" data-target="#updateModal" data-whatever="@mdo" data-bs-dismiss="offcanvas">
+        Update
+      </button></li><br>
+	  <li><button class="btn btn-danger ac" type="button" id="delete" data-toggle="modal" data-target="#deleteModal" data-whatever="@mdo" data-bs-dismiss="offcanvas">
+        Delete
+      </button></li><br>
+	  </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!--                Create Operation Starts                             -->
+
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="https://script.google.com/macros/s/AKfycbzqqo75KZvW-aCXsd7gIWmZTOyAUnWf8XoC8-ZIyzMr7J5NF4bsf-mg3wHVI6iU-L4YHw/exec" id="createForm" method="post" target="my-iframe">
+          <div class="form-group">
+              <label> Name : </label>
+              <input required type="text"  name="name" id="name"  accept="application/msword, application/pdf, image/*" class="form-control">
+              </div>
+              
+              <div class="form-group">
+              <label> Email : </label>
+              <input required type="text"  name="email" id="email" class="form-control">
+              </div>
+              
+              <div class="form-group">
+               <label> Branch :</label>
+              <select name="branch" id="branch" class="form-control">
+              <option value="none">Select</option>
+                   <option value="CSE">CSE</option>
+                   <option value="IT">IT</option>
+                   <option value="ECE">ECE</option>
+                   <option value="EEE">EEE</option>
+                 <option value="ME">ME</option>
+                 <option value="CE">CE</option>
+                 <option value="MCA">MCA</option>
+                  </select>
+             </div>
+          
+          <br>       
+          <div class="form-group">
+          <label> Upload Resume/cv :</label>
+              <div id="data"></div>
+              <input name="file" id="uploadfile" type="file" class="form-control">
+          </div><br/>
+              <input id="create-button" type="submit" class="btn btn-primary" onclick="spinner_start();">
+            </form>
+        <iframe name="my-iframe" src="https://script.google.com/macros/s/AKfycbzqqo75KZvW-aCXsd7gIWmZTOyAUnWf8XoC8-ZIyzMr7J5NF4bsf-mg3wHVI6iU-L4YHw/exec" style="display: none;" onload="changed()"></iframe>
+        </div>
+
+        <!-- Validation success -->
+        <div class="container"><br/>
+        <div style="color:green;"  class="alert alert-success" id="display">
+                Data uploaded successfully
+        </div>
+        </div>
+
+        <!-- Response from Backend -->
+        <p id="resInsert"></p>
+
+        <!-- Validation errors -->
+      <div class="container" >
+			<div id="email-error" class="alert alert-danger">
+			  Enter a valid Name or Email Id or file!!
+			</div>
+
+      <!-- Spinner -->
+			<div class="content" id="loader1">
+        <div class="spinner">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8" cy="8" r="7" stroke-width="2"/>
+          </svg>
+        </div>
+      
+      
+			</div>
+			</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--                Read Operation Starts                             -->
+
+<div class="modal fade bd-example-modal-lg" id="readModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Read Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+     <!-- Response From Backend -->
+      <div id="showData"></div>
+        </div>
+     
+       <!-- Spinner -->
+			<div class="content" id="loader">
+        <div class="spinner">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8" cy="8" r="7" stroke-width="2"/>
+          </svg>
+        </div>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="fetch-action" onclick="read_value();" type="button" class="btn btn-primary">Fetch details</button>
+		
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--                Update Operation Starts                             -->
+
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="update-form">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">email:</label>
+            <input id="update-email" type="text" class="form-control" id="recipient-name">
+          </div>
+		   <div class="form-group" id="updateName">
+            <label for="recipient-name" class="col-form-label">Name:</label>
+            <input id="update-name" type="text" class="form-control" >
+          </div>
+		  <div class="form-group" id="updateBranch">
+            <label for="recipient-branch" class="col-form-label">branch:</label>
+            <input id="update-branch" type="text" class="form-control">
+          </div>
+        </form>
+          <p id="resDetails"></p>
+          <p id="resUpdate"></p>
+          <div class="container" >
+
+      <!-- Validation Errors -->
+			<div id="updateEmailError" class="alert alert-danger">
+			  Enter a valid Email Id!!
+			</div>
+    </div>
+
+    <!-- Spinner -->
+    <div class="container">
+			<div class="content" id="loader3">
+			  <div class="spinner">
+				<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<circle cx="8" cy="8" r="7" stroke-width="2"/>
+				</svg>
+			  </div>
+			</div>
+    </div>
+
+    <!-- Spinner -->
+    <div class="container">
+			<div class="content" id="loader5">
+			  <div class="spinner">
+				<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<circle cx="8" cy="8" r="7" stroke-width="2"/>
+				</svg>
+			  </div>
+			</div>
+    </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="fetchAction" onclick="updateFun();" type="button" class="btn btn-primary">Fetch details</button>
+		<button id="updateAction" onclick="update_value()" type="button" class="btn btn-primary" >Update details</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--  Delete Operation Starts           -->
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="delete-form">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">email:</label>
+            <input id="delete-email" type="text" class="form-control" id="recipient-name">
+          </div>
+		   <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Name:</label>
+            <input id="delete-name" type="text" class="form-control" >
+          </div>
+      <div class="form-group" id="deleteCode">
+            <label for="recipient-name" class="col-form-label">Unique Code:</label>
+            <input id="unique_code" type="text" class="form-control" >
+      </div>
+      <p id="code_validate">Enter the unique code received in email!</p>
+    </form>
+
+    <!-- Response From Backend -->
+		  <p id="resDelete"></p>
+
+      <!-- Validation Error -->
+      <div class="container">
+      <div id="deleteEmailError" class="alert alert-danger">
+			  Enter a valid Name or Email Id!
+			</div>
+    </div>
+
+    <!-- Spinner -->
+      <div class="container">
+			<div class="content" id="loader7">
+			  <div class="spinner">
+				<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<circle cx="8" cy="8" r="7" stroke-width="2"/>
+				</svg>
+      </div>
+			</div>
+				</div> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="code-action" onclick="codeGenerate();" type="button" class="btn btn-secondary">Send Code</button>
+		   <button id="delete-action" onclick="delete_value()" type="button" class="btn btn-primary" >Delete details</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<!--                  Template   Ends                           -->
+
+    
+  </div>
+  </body>
+  <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="js/read_data.js"></script>
+    <script src="js/insert_data.js"></script>
+    <script src="js/update_data.js"></script>
+    <script src="js/delete_data.js"></script>
+    <script src="js/unique_code_generate.js"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+
+</html>
