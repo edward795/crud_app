@@ -120,14 +120,19 @@ margin-bottom:0px;
 margin-top:110px;
 }
 
-#loader,#loader1,#loader3,#loader5,#loader7{
-  margin-left:200px;
-  
-}
 
 #showData{
   overflow-x: auto;
 }
 #code_validate{
   color:green;
+}
+.container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  
 }
