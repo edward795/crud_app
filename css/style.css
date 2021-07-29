@@ -125,13 +125,6 @@ margin-top:110px;
   
 }
 
-@media only screen and (max-width: 768px) {
-  /* For mobile phones: */
-  #loader,#loader1,#loader3,#loader5,#loader7{
-    margin-left:120px; 
-  }
-}
-
 #showData{
   overflow-x: auto;
 }
