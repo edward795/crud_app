@@ -5,8 +5,9 @@
 <li>Javascript</li>
 <li>Bootstrap 5</li>
 <li>jQuery</li>
-<li>A little AppScript</li><br>
-<p>Wow!! only this much no backend framework!  trust me and look below, All you need other than this is a google account!</p>
+<li>A little AppScript</li>
+<li><b>Here google sheets act as the database table,where table name is the sheet name and attached to its workspace and tools i have written js code for operations.</li></b> <br>
+<p>Wow!! only this much no backend framework!  trust me and look below, All you need other than this is a google account! which obviously everyone has!</p>
 <h4>Visit this <a href="https://edward795.github.io/crud_app/">link</a> for Demo!</h4>
   <h3>1.Home Template</h3>
   <p float="left">
