@@ -33,8 +33,8 @@
   <li>Json data used to build a responsive table,with uploaded file link in google drive.</li>
   <h3>4.Update Operation</3>
   <p float="left">
-  <img src="sample images/update.png" width="400">
-   <img src="sample images/update_data.png" width="400">
+  <img src="sample images/update.png" width="440">
+   <img src="sample images/update_data.png" width="440">
   </p>
   <h4>Features</h4>
   <li>Uses email id to filter data in database</li>
@@ -56,7 +56,8 @@
   <li>All Logical Validations in Google Sheets Backend for Security Improvement, only basic field validations in frontend!</li>
   <li>jQuery callback returns success or failure as callbacks as template for improved security</li>
   <h3>6.Backend Google Sheets Code</h3>
-  <li>See the code.gs file</li>
+  <li>A combination of javascript & appscript</li>
+  <li>See the <a href="code.gs">code.gs</a> file</li>
   <br>
   <h3>If you liked this repo & found it useful please give a star,it's with a lot of effort i am putting forward this.</h3>
   
