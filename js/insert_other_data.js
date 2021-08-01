@@ -8,7 +8,7 @@ function insert_value() {
 	
 	
     var url = script_url+"?callback=createResponse&name="+name+"&email="+email+"&branch="+branch+"&action=insert";
-	//console.log(url);
+	console.log(url);
   
     var request = jQuery.ajax({
 		crossDomain: true,
@@ -22,7 +22,7 @@ function insert_value() {
 //Response from callback
 
   function createResponse(e) {
-	//console.log(e.result);
+	console.log(e.result);
 	$("#resInsert").show();
 	$("#resInsert").html(e.result);
 	document.getElementById("loader1").style.display = "none";
