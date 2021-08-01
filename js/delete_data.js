@@ -1,4 +1,4 @@
- var script_url = "https://script.google.com/macros/s/AKfycbzqqo75KZvW-aCXsd7gIWmZTOyAUnWf8XoC8-ZIyzMr7J5NF4bsf-mg3wHVI6iU-L4YHw/exec";
+ 
  document.getElementById("loader7").style.display = "none";
  document.getElementById("deleteEmailError").style.display = "none";
   
