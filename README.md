@@ -61,6 +61,12 @@
   <li>See the <a href="code.gs">code.gs</a> file</li>
   <br>
   <h3>If you liked this repo & found it useful please give a star,it's with a lot of effort i am putting forward this.</h3>
+  <h2>Updates</h2>
+  <h3>#Update 1</h3>
+  <li>Added unique emails only for data create operation in backend and status of create operation,see  the below gif.</li>
+  <p float="left">
+  <img src="sample images/create_change.gif" width="800">
+  </p>
   
   
   
