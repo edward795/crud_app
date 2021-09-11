@@ -40,7 +40,9 @@ body{
       *{
         font-size:12px;
         }
-
+      table{
+          font-size:10px;
+      }
       #dashboard{
          width:180px;
         }
