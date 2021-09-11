@@ -38,10 +38,10 @@ body{
 
   @media screen and (max-width: 600px) {
       *{
-        font-size:10px;
+        font-size:12px;
         }
 
       #dashboard{
-         width:160px;
+         width:180px;
         }
     }    
